@@ -13,8 +13,8 @@ public interface ClientDAO {
     void remove(Client client);
     Client update(Client client);
     Client findOneById(int id);
-    Client findOneByLastName(String lastName);
-    Client findOneByEmail(String email);
-    Client findOneByItn(String itn);
-    List<Client> findAll(Client cients);
+    Client findByLastName(String lastName);
+    Client findByEmail(String email);
+    Client findByItn(String itn);
+    List<Client> findAll(Client client);
 }

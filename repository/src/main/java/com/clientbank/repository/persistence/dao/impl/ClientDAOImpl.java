@@ -12,11 +12,11 @@ import java.util.List;
 /**
  * Created by elena on 10.08.15.
  */
-@Repository
-@Transactional
+//@Repository
+//@Transactional
 public class ClientDAOImpl implements ClientDAO {
-    @PersistenceContext
-    EntityManager entityManager;
+//    @PersistenceContext
+//    EntityManager entityManager;
 
     @Override
     public Client save(Client client) {
@@ -40,7 +40,7 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     @Override
-    public Client findOneByLastName(String lastName) {
+    public Client findByLastName(String lastName) {
         List<Client> clients = entityManager.createQuery("from Clients c where c.lastName=:lastName")
                 .setParameter("lastName", lastName)
                 .getResultList();
@@ -48,7 +48,7 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     @Override
-    public Client findOneByEmail(String email) {
+    public Client findByEmail(String email) {
         List<Client> clients = entityManager.createQuery("from Clients c where c.email=:email")
                 .setParameter("email", email)
                 .getResultList();
@@ -56,12 +56,12 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     @Override
-    public Client findOneByItn(String itn) {
+    public Client findByItn(String itn) {
         return null;
     }
 
     @Override
-    public List<Client> findAll(Client cients) {
+    public List<Client> findAll(Client client) {
         return null;
     }
 }

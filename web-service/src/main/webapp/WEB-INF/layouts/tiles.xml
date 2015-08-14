@@ -8,5 +8,4 @@
     <definition name="/join/step1" template="/WEB-INF/layouts/join.jsp"/>
 
 
-
 </tiles-definitions>

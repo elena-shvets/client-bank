@@ -9,11 +9,11 @@ import java.util.List;
  */
 public interface AccountDAO {
 
-    Account createAccount();
-    Account save(Account account);
+    Account createAccount(Account account);
+//    Account save(Account account);
     Account update(Account account);
     void remove(Account account);
     Account findOneById(int id);
     List<Account> findAll();
-    Account getAccountsByUserId(int clientId);
+    List<Account> getAccountsByClientId(int clientId);
 }

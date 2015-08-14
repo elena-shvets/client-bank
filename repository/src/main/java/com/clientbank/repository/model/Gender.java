@@ -5,16 +5,6 @@ package com.clientbank.repository.model;
  */
 public enum Gender {
 
-    FEMALE("Female"),
-    MALE("Male");
+    FEMALE, MALE;
 
-    Gender(String name) {
-        this.name=name;
-    }
-
-    private String name;
-
-    public String getName() {
-        return name;
-    }
 }

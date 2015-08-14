@@ -1,50 +1,45 @@
 package com.clientbank.repository.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 
 /**
  * Created by elena on 04.08.15.
  */
-@Entity
-@Table(name="account")
+//@Entity
+//@Table(name="account")
 public class Account {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="id_account", unique=true, nullable=false)
-    private int id;
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.AUTO)
+//    @Column(name="id_account", unique=true, nullable=false)
+    private Integer id;
 
-    @Column(name="client_id")
+//    @Column(name="client_id")
     private int clientId;
 
-    @Column(name="type_id")
+//    @Column(name="type_id")
     private int typeId;
 
-    @Column(name="balance")
+//    @Column(name="balance")
     private double balance;
 
-    @Column(name="currency")
+//    @Column(name="currency")
     private Currency currency;
+
 
     private AccountType accountType;
 
-    @Column(name="date_create")
+//    @Column(name="date_create")
     public Date date_create;
 
     public Account() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

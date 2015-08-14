@@ -23,10 +23,10 @@ login page
         </tr>
         <tr>
             <td>Password:</td>
-            <td><input type='text' name='mdl' /></td>
+            <td><input type='text' name='mdl'/></td>
         </tr>
         <tr>
-            <td colspan='2'><input name="submit" type="submit" value="submit" /></td>
+            <td colspan='2'><input name="submit" type="submit" value="submit"/></td>
         </tr>
     </table>
     <br/>
