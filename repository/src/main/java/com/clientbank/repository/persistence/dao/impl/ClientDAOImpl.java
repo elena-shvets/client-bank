@@ -2,11 +2,15 @@ package com.clientbank.repository.persistence.dao.impl;
 
 import com.clientbank.repository.model.Client;
 import com.clientbank.repository.persistence.dao.ClientDAO;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,29 +18,43 @@ import java.util.List;
  */
 //@Repository
 //@Transactional
+@Component
 public class ClientDAOImpl implements ClientDAO {
-//    @PersistenceContext
+    //    @PersistenceContext
 //    EntityManager entityManager;
+    @Autowired
+    @Qualifier("jdbcTemplate")
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public Client save(Client client) {
-        entityManager.persist(client);
+        String query = "insert into Account (clientId, typeId, currency, accountType) values (?,?,?,?)";
+        jdbcTemplate.update(query, new Object[]{client.getEmail(), client.getPassword(), client.getLastName(), client.getItn()});
         return client;
     }
 
     @Override
     public void remove(Client client) {
-        entityManager.remove(client);
+        String query = "DELETE FROM Client WHERE ID = ?";
+        int affectedRows = jdbcTemplate.update(query, client.getId());
     }
 
     @Override
     public Client update(Client client) {
-        return entityManager.merge(client);
+        String query = "UPDATE client SET email = ?, password = ?, lastName = ? WHERE clientId= ?";
+
+        jdbcTemplate.update(
+                query,
+                new Object[]{client.getEmail(), client.getPassword(), client.getLastName()});
+        return client;
     }
 
     @Override
     public Client findOneById(int id) {
-        return entityManager.find(Client.class, id);
+        List<Client> clients = new ArrayList<Client>();
+        String query = "SELECT * FROM client WHERE id= " + id;
+        clients = jdbcTemplate.query(query, new ClientRowMapper());
+        return clients.get(0);
     }
 
     @Override
@@ -63,5 +81,17 @@ public class ClientDAOImpl implements ClientDAO {
     @Override
     public List<Client> findAll(Client client) {
         return null;
+    }
+
+    public class ClientRowMapper implements RowMapper<Client> {
+
+        public Client mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Client client = new Client();
+            client.setId(rs.getInt("id"));
+            client.setEmail(rs.getString("email"));
+            client.setPassword(rs.getString("password"));
+            client.setLastName(rs.getString("lastName"));
+            return client;
+        }
     }
 }
