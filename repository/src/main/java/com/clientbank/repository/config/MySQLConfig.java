@@ -1,5 +1,6 @@
 package com.clientbank.repository.config;
 
+import com.google.common.base.Preconditions;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +24,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @PropertySource({ "classpath:persistence.properties" })
-@ComponentScan({ "com.mutopia.repository" })
+@ComponentScan({ "com.clientbank.repository" })
 public class MySQLConfig {
 
     @Autowired
@@ -33,7 +34,7 @@ public class MySQLConfig {
     public LocalSessionFactoryBean sessionFactory() {
         final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[] { "com.mutopia.repository" });
+        sessionFactory.setPackagesToScan(new String[] { "com.clientbank.repository" });
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -41,10 +42,10 @@ public class MySQLConfig {
     @Bean
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName(Preconditions.checkNotNull(env.getProperty("jdbc.driverClassName")));
-//        dataSource.setUrl(Preconditions.checkNotNull(env.getProperty("jdbc.url")));
-//        dataSource.setUsername(Preconditions.checkNotNull(env.getProperty("jdbc.user")));
-//        dataSource.setPassword(Preconditions.checkNotNull(env.getProperty("jdbc.pass")));
+        dataSource.setDriverClassName(Preconditions.checkNotNull(env.getProperty("jdbc.driverClassName")));
+        dataSource.setUrl(Preconditions.checkNotNull(env.getProperty("jdbc.url")));
+        dataSource.setUsername(Preconditions.checkNotNull(env.getProperty("jdbc.user")));
+        dataSource.setPassword(Preconditions.checkNotNull(env.getProperty("jdbc.pass")));
         return dataSource;
     }
 

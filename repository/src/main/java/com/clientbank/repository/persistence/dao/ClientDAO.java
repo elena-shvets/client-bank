@@ -17,4 +17,6 @@ public interface ClientDAO {
     Client findByEmail(String email);
     Client findByItn(String itn);
     List<Client> findAll(Client client);
+
+
 }

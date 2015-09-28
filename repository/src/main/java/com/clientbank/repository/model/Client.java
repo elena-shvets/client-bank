@@ -1,6 +1,6 @@
 package com.clientbank.repository.model;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 /**
  * Created by elena on 04.08.15.
@@ -37,10 +37,10 @@ public class Client {
     public Gender gender;
 
 //    @Column(name="birth_date")
-    private Date birthDate;
+    private DateTime birthDate;
 
 //    @Column(name="register_date")
-    private Date registerDate;
+    private DateTime registerDate;
 
 
     public Client() {
@@ -110,19 +110,19 @@ public class Client {
         this.gender = gender;
     }
 
-    public Date getBirthDate() {
+    public DateTime getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(DateTime birthDate) {
         this.birthDate = birthDate;
     }
 
-    public Date getRegisterDate() {
+    public DateTime getRegisterDate() {
         return registerDate;
     }
 
-    public void setRegisterDate(Date registerDate) {
+    public void setRegisterDate(DateTime registerDate) {
         this.registerDate = registerDate;
     }
 }

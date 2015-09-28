@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.ClientService;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 /**
@@ -18,26 +20,20 @@ public class ClientServiceImpl implements ClientService {
     ClientDAO clientDAO;
 
     @Override
-    public Client save(Client client) {
-        if (client == null) {
-            throw new IllegalArgumentException("Client must not be null");
-        }
+    public Client save(@NotNull Client client) {
+
         return clientDAO.save(client);
     }
 
     @Override
-    public Client update(Client client) {
-        if (client == null) {
-            throw new IllegalArgumentException("Client must not be null");
-        }
+    public Client update(@NotNull Client client) {
+
         return clientDAO.update(client);
     }
 
     @Override
-    public void remove(Client client) {
-        if (client == null) {
-            throw new IllegalArgumentException("Client must not be null");
-        }
+    public void remove(@NotNull Client client) {
+
         clientDAO.remove(client);
     }
 
@@ -47,11 +43,10 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client findOneById(Integer id) {
-        if (id != null) {
+    public Client findOneById(@NotNull Integer id) {
+
             return clientDAO.findOneById(id);
-        }
-        throw new IllegalArgumentException("Client must not be null");
+
     }
 
     @Override
@@ -61,18 +56,25 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client findOneByEmail(String email) {
-        if (email == null) {
-            throw new IllegalArgumentException("Client must not be null");
-        }
+
+    @Pattern(regexp = "^(?:[a-zA-Z0-9_'^&/+-])+(?:\\.(?:[a-zA-Z0-9_'^&/+-])+)" +
+            "*@(?:(?:\\[?(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))\\.)" +
+            "{3}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\]?)|(?:[a-zA-Z0-9-]+\\.)" +
+            "+(?:[a-zA-Z]){2,}\\.?)$",
+            message = "Email specified does not exist")
+    public Client findOneByEmail(@NotNull String email) {
+
         return  clientDAO.findByEmail(email);
     }
 
     @Override
-    public Client findOneByItn(String itn) {
-        if (itn == null) {
-            throw new IllegalArgumentException("Client must not be null");
-        }
+    public Client findOneByItn(@NotNull String itn) {
+
         return  clientDAO.findByItn(itn);
+    }
+
+    @Override
+    public boolean alreadyExists(String nickName) {
+        return false;
     }
 }

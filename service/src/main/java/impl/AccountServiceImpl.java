@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.AccountService;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -13,39 +14,31 @@ import java.util.List;
  */
 @Service("clientService")
 public class AccountServiceImpl implements AccountService {
+
     @Autowired
     AccountDAO accountDAO;
 
     @Override
-    public Account save(Account account) {
-        if(account == null){
-            throw new IllegalArgumentException("Account must not be null");
-        }
-        return accountDAO.save(account);
+    public Account save(@NotNull Account account) {
+        return accountDAO.createAccount(account);
     }
 
     @Override
-    public Account update(Account account) {
-        if(account == null){
-            throw new IllegalArgumentException("Account must not be null");
-        }
+    public Account update(@NotNull Account account) {
+
         return accountDAO.update(account);
     }
 
     @Override
-    public void remove(Account account) {
-        if(account == null){
-            throw new IllegalArgumentException("Account must not be null");
-        }
+    public void remove(@NotNull Account account) {
+
          accountDAO.remove(account);
 
     }
 
     @Override
-    public Account findOneById(Integer id) {
-        if(id == null){
-            throw new IllegalArgumentException("Account must not be null");
-        }
+    public Account findOneById(@NotNull Integer id) {
+
         return accountDAO.findOneById(id);
 
     }

@@ -16,4 +16,5 @@ public interface ClientService {
     List<Client> findByLastName(String lastName);
     Client findOneByEmail(String email);
     Client findOneByItn(String itn);
+    boolean alreadyExists(String nickName);
 }

@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+              http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="client" class="com.clientbank.repository.model.Client"/>
+    <bean id="clientDao" class="com.clientbank.repository.persistence.dao.ClientDAO" abstract="true">
+        <property name="dataSource" ref="basicDataSource"/>
+    </bean>
+
+    <bean id="basicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost/clientbank" />
+        <property name="username" value="root" />
+        <property name="password" value="S+ar+10g!n_db" />
+        <property name="initialSize" value="3" />
+        <property name="maxActive" value="10" />
+    </bean>
+</beans>

@@ -28,7 +28,7 @@ public class ClientDAOImpl implements ClientDAO {
 
     @Override
     public Client save(Client client) {
-        String query = "insert into Account (clientId, typeId, currency, accountType) values (?,?,?,?)";
+        String query = "insert into Client (clientId, email, password, itn) values (?,?,?,?)";
         jdbcTemplate.update(query, new Object[]{client.getEmail(), client.getPassword(), client.getLastName(), client.getItn()});
         return client;
     }
@@ -59,18 +59,20 @@ public class ClientDAOImpl implements ClientDAO {
 
     @Override
     public Client findByLastName(String lastName) {
-        List<Client> clients = entityManager.createQuery("from Clients c where c.lastName=:lastName")
-                .setParameter("lastName", lastName)
-                .getResultList();
-        return clients.size() == 0 ? null : clients.get(0);
+//        List<Client> clients = entityManager.createQuery("from Clients c where c.lastName=:lastName")
+//                .setParameter("lastName", lastName)
+//                .getResultList();
+//        return clients.size() == 0 ? null : clients.get(0);
+        return null;
     }
 
     @Override
     public Client findByEmail(String email) {
-        List<Client> clients = entityManager.createQuery("from Clients c where c.email=:email")
-                .setParameter("email", email)
-                .getResultList();
-        return clients.size() == 0 ? null : clients.get(0);
+//        List<Client> clients = entityManager.createQuery("from Clients c where c.email=:email")
+//                .setParameter("email", email)
+//                .getResultList();
+//        return clients.size() == 0 ? null : clients.get(0);
+        return null;
     }
 
     @Override
